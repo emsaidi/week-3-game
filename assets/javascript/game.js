@@ -4,6 +4,7 @@ var wins = 0;
 var losses = 0;
 var tries = 0;
 var guesses = [];
+var guessesLeft = 10;
 
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
@@ -13,27 +14,32 @@ document.onkeyup = function(event) {
 	    if (tries <= 9){
 			if (userGuess === computerGuess){
 				wins++;
+				//addTrophy();
 			}else{
 				losses++;
 			}
 			guesses.push(userGuess);
 			tries++;
+			guessesLeft = guessesLeft - 1;
 		}else if (tries >= 10){
 			reset();
 			}	
 
 		var html = "<p>Guess what letter I'm thinking of.</p>" +
-		"<p>wins: " + 
+		"<p>Wins: " + 
 		wins + 
 		"</p>" +
-		"<p>losses: " + 
+		"<p>Losses: " + 
 		losses + 
 		"</p>" +
-		"<p>tries: " +
+		"<p>Tries: " +
 		tries +
-		"<p >" +
-		"</p>Guesses: " +
-		guesses.join(" - ");
+		"<p>" +
+		"<p> Guesses Left: " +
+		guessesLeft +
+		"<p>" +
+		"</p>Guesses So Far: " +
+		guesses.join(" | ");
 
 	document.querySelector('#game').innerHTML = html;
 
@@ -42,8 +48,16 @@ document.onkeyup = function(event) {
 function reset(){
 	guesses = [];
 	tries = 0;
-	wins = 0;
-	losses =0;
+	losses = 0;
+	guessesLeft = 10;
 	computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 	alert("You've exhausted your tries. Try again.");
 }
+
+//function addTrophy(){
+	//var img = document.createElement('img');
+	//img.src = 'assets/images/trophy.png';
+
+	//var src = document.getElementById('#trophy');
+	//src.appendChild(img);
+//}
